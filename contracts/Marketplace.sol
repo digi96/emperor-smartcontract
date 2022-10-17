@@ -189,13 +189,23 @@ contract Marketplace is
             );
         }
 
-        emit ListingDelisted(
+        if(listing.tokenType == TokenType.ERC721){
+            emit ListingDelisted(
             listing.listingId,
-            listing.tokenType,
+            "ERC721",
             listing.tokenId,
             listing.seller,
             listing.price
-        );
+            );
+        }else{
+            emit ListingDelisted(
+            listing.listingId,
+            "ERC1155",
+            listing.tokenId,
+            listing.seller,
+            listing.price
+            );
+        }
     }
 
     function getUnsoldListings() public view returns (Listing[] memory) {

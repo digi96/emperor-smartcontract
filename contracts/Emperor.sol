@@ -4,6 +4,7 @@ pragma solidity ^0.8.1;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 
 //import "./EmperorUtils.sol";
 //import "./EmperorTemplates.sol";
@@ -43,5 +44,10 @@ contract Emperor is ERC721URIStorage {
         //setApprovalForAll(contractAddress, true);
 
         return newItemId;
+    }
+
+    function burnNFT(uint256 tokenId) public {
+        require(ownerOf(tokenId) == msg.sender, "You are not owner of the token");
+        _burn(tokenId);
     }
 }
